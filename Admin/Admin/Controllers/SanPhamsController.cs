@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Admin.Models;
 
@@ -14,25 +10,10 @@ namespace Admin.Controllers
     {
         private CT25Team25Entities2 db = new CT25Team25Entities2();
 
-        public ActionResult Search(string keyword)
-        {
-            if (keyword.Trim(' ') == "")
-            {
-                return RedirectToAction("Index", "SanPhams");
-            }
-            else
-            {
-                var model = db.SanPhams.ToList();
-                model = model.Where(p => p.TenSP.ToLower().Contains(keyword.ToLower())
-                                    || p.LoaiSanPham.TenLoaiSP.ToLower().Contains(keyword.ToLower())).ToList();
-                ViewBag.Keyword = keyword;
-                return View("Search2", model);
-            }
-        }
-
         // GET: SanPhams
         public ActionResult Index()
         {
+
             var sanPhams = db.SanPhams.Include(s => s.LoaiSanPham);
             return View(sanPhams.ToList());
         }

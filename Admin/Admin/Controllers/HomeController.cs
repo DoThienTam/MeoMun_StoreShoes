@@ -1,29 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Admin.Models;
+using System;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+
 
 namespace Admin.Controllers
 {
     public class HomeController : Controller
     {
+        private CT25Team25Entities2 db = new CT25Team25Entities2();
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Search(string searchString)
         {
-            ViewBag.Message = "Your application description page.";
+            var links = from l in db.SanPhams // lấy toàn bộ liên kết
+                        select l;
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
+            if (!String.IsNullOrEmpty(searchString)) // kiểm tra chuỗi tìm kiếm có rỗng/null hay không
+            {
+                links = links.Where(s => s.TenSP.Contains(searchString)); //lọc theo chuỗi tìm kiếm
+            }
             return View();
         }
     }

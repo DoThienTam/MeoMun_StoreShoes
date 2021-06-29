@@ -114,19 +114,12 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <div class="input-group">
-                            <form action="@Url.Action("Search","SanPhams")" method="get" value="@ViewBag.Keyword">
-                                <input type="text" name="Keyword" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                       aria-label="Search" aria-describedby="basic-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </form>
+                        <form class="timkiem">
+                            <div class="form-group form-inline">
+                                <input placeholder="Nhập từ khoá" type="text" name="Searchkey" class="form-control form-inline" />
+                                <input type="submit" name="submit" value="Tìm kiếm" class="form-control" />
+                            </div>
+                        </form>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
