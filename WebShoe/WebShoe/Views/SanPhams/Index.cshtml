@@ -1,0 +1,39 @@
+﻿@model IEnumerable<WebShoe.Models.SanPham>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<section>
+  
+                        @foreach (var item in Model)
+                        {
+                           
+                                        <form action="@Url.Action("AddtoCart","GioHangs")" method="post">
+                                            <input type="hidden" name="productid" value="@item.MaSP" />
+                                            <div class="menu__content">
+                                                <img src="~/images/@item.ImagePath" alt="@item.ImagePath" class="menu__img" width="300">
+                                                <h3 class="menu__name"></h3>
+                                                <i class="fa fa-star yellow-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star yellow-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star yellow-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star yellow-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star gray-star" aria-hidden="true"></i><br />
+                                                <span class="menu__detail">Tên sản phẩm: @item.TenSP</span><br />
+
+                                                @Html.ActionLink("Xem Chi Tiết", "Details", new { id = item.MaSP })
+                                                <div class="form-w3agile">
+                                                    <form action="@Url.Action("Index","GioHangs")" method="post">
+
+                                                        <input type="submit" value="Thêm vào giỏ">
+                                                    </form>
+                                                </div>
+
+
+                                            </div>
+                                        </form>
+                                        }
+                         
+ 
+</section>

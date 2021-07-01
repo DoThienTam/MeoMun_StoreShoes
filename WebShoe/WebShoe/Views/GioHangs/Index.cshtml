@@ -1,0 +1,83 @@
+﻿@model IEnumerable<WebShoe.Models.DonHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    double total = 0;
+}
+
+<body>
+    @if (Session["cart"] != null)
+    {
+        <div class="small-container cart-page">
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Sản Phẩm</th>
+                    <th>Số Lượng</th>
+                    <th>Thành tiền</th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    total += Convert.ToDouble(item.SanPham.DonGia * item.SoLuong);
+                    <tr>
+                        @*<div class="cart-info">*@
+                        <td>
+                            <img src="~/images/@item.SanPham.ImagePath" width="150">
+                        </td>
+                        <td>
+                            <div>
+                                <p>
+                                    Tên sản phẩm: @item.SanPham.TenSP
+                                </p>
+                                <small>Giá: @item.SanPham.DonGia VND</small>
+                                <br>
+                            </div>
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("UpdateCart", "GioHangs"))
+                            {
+                                <div class="center-block">
+                                    <input type="hidden" value="@item.SanPham.MaSP" name="productid" />
+                                    <input type="number" class="input-group" value=@item.SoLuong min="1" max="99" name="soluong" />
+                                    <button type="submit" class="btn button bt-dangnhap">Cập nhật</button>
+                                </div>
+
+                            }
+                        </td>
+                        <td>
+                            @((item.SanPham.DonGia * item.SoLuong))VND
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("xoaSP", "GioHangs"))
+                            {
+                                <input type="hidden" value="@item.SanPham.MaSP" name="id" />
+                                <button type="submit" class="btn button bt-dangnhap">Xóa sản phẩm</button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+            <table>
+                <tr>
+                    <td>Tổng tiền</td>
+                    <td>@total.ToString("N0") VND</td>
+                </tr>
+            </table>
+            <p>
+                <div class="text-right">
+                    <a href=@Url.Action("Index", "SanPhams") class="button btn">Tiếp tục mua hàng</a>
+                    <a href=@Url.Action("checkout", "Cart") class="button btn">Đặt hàng</a>
+                </div>
+            </p>
+        </div>
+    }
+    else
+    {
+        <div class="text-center">
+            Không có sản phẩm nào trong giỏ hàng
+        </div>
+    }
+</body>
+

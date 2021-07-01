@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h1><center>Danh sách sản phẩm</center></h1>
+
+<table class="table">
+    <tr>
+        <th>Hình ảnh</th>
+        <th>Tên sản phẩm</th>
+        <th>Nhãn hiệu</th>
+        <th>Số lượng</th>
+        <th>Kích cỡ</th>
+        <th>Đơn giá</th>
+        <th>Mô tả</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img class="image" id="imgPre" src="~/Assests/img/@item.ImagePath" style='width: 150px; height: 150px'>
+            </td>
+            <td>
+                @item.TenSP
+            </td>
+            <td>
+                @item.LoaiSanPham.TenLoaiSP
+            </td>
+            <td>
+                @item.SoLuong
+            </td>
+            <td>
+                @item.SIZE
+            </td>
+            <td>
+                @item.DonGia
+            </td>
+            <td>
+                @item.MoTa
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
